@@ -1,0 +1,41 @@
+In Macbook pro:-
+1. Create a Docker Image
+First, ensure you have a Docker image of your application. You mentioned earlier about building an image with the command:
+
+docker build -t ml-flask-app .
+This command builds your Docker image locally and tags it as ml-flask-app.
+
+2. Tag Your Docker Image for a Registry
+Before you can push your image to a Docker registry, you need to tag it with the registry's name. If you're using Docker Hub, the tag format is username/repository:tag. If you haven't created a repository on Docker Hub yet, you should do so.
+
+docker tag ml-flask-app username/ml-flask-app:latest
+Replace username with your Docker Hub username. The latest tag is optional but commonly used to indicate the most recent version.
+
+3. Push Your Docker Image to Docker Hub
+Next, push the image to Docker Hub. First, log in to Docker Hub from your terminal:
+
+docker login
+Enter your Docker Hub username and password. After logging in, push your image:
+
+docker push username/ml-flask-app:latest
+4. Pull and Run the Docker Image on the Other Ubuntu Machine
+
+
+In Linux m/c:-
+Now, move to your other Ubuntu machine where you want to run the container. Ensure Docker is installed on this machine as well. Then, log in to Docker Hub (if you're not logged in already):
+
+docker login
+Pull the Docker image:
+
+docker pull username/ml-flask-app:latest
+Finally, run the Docker container:
+
+docker run -p 5000:80 username/ml-flask-app:latest
+This command runs your Docker container, mapping port 80 inside the container to port 5000 on the host machine. Adjust the port mappings as necessary for your application.
+
+Summary
+By following these steps, you've successfully transferred your containerized application to another machine without directly transferring the source code or Dockerfile. This process makes deploying and managing applications more efficient, especially when working across multiple environments or machines.
+
+
+
+
